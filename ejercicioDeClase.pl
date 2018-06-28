@@ -124,7 +124,7 @@ meAlcanzaPaRatonear(Super,Monto):-
 	sumList(ListaDeProdBaratos,Total),
 	Monto>=Total.
 
-% cantidad<=monto (forma de la beluli)
+% Total<=Monto (forma de la beluli)
 	
 	
 
