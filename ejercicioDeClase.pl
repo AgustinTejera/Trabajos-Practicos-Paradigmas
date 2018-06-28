@@ -82,7 +82,7 @@ quiereComprar(ana,cafe).
 
 cuantosProductosTiene(Super,CantProd):-
 	producto(Super,_,_,_),
-	findall(Producto,(Producto(Super,_,Producto,_)), Lista),
+	findall(Producto,(producto(Super,_,Producto,_)), Lista),
 	length(Lista,CantProd).
 	
 %se agrega super porque no esta ligado, en cambio producto ya esta ligado dentro del findall. Para que sea inversible todo.
