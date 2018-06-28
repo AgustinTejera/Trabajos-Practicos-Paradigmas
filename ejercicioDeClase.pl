@@ -129,6 +129,8 @@ meAlcanzaPaRatonear(Super,Monto):-
 	
 
 
+forall(Paratodosestos, se cumpleesto)
+
 
 
 
