@@ -1,0 +1,90 @@
+//AGUSTIN TEJERA - CURSO K2104 - TP1 OBJETOS
+
+object paqueteMisterioso {
+	
+	var mensajero = roberto
+	var destino = puenteDeBrooklyn
+	var pago = false
+	method puedeEntregarse() {
+		return destino.dejaPasar(mensajero) && pago
+	}
+	method estaPagoPaquete(){
+		pago = true
+	}
+}
+
+object puenteDeBrooklyn {
+	
+	method dejaPasar(mensajero){
+		return (mensajero.peso()) < 1000
+	}
+}
+
+object matrix {
+	
+	method dejaPasar(mensajero){
+		return mensajero.puedeHacerLlamado()
+	}
+}
+
+object roberto {
+	var vehiculo = jenny
+	var pesoPropio = 90
+	method peso() {
+		return vehiculo.pesoAgregado() + pesoPropio
+	}
+	method puedeHacerLlamado(){
+		return false
+	}
+	
+	method cambiarVehiculo(nuevoVehiculo){
+		vehiculo = nuevoVehiculo
+	}
+}
+
+object jenny {
+	method pesoAgregado(){
+		return 0
+	}
+}
+
+object mack {
+	var acoplados = 1
+	method pesoAgregado(){
+		return 500 * acoplados
+	}
+	method agregarAcoplado(){
+		acoplados += 1
+	}
+}
+
+object chuckNorris {
+	
+	method peso(){
+		return 900
+	}
+	method puedeHacerLlamado(){
+		return true
+	}
+}
+
+object neo{
+	var tieneCredito = true
+	method peso(){
+		return 0
+	}
+	method puedeHacerLlamado(){
+		return tieneCredito
+	}
+	
+	method agregarCredito(){
+		tieneCredito = true
+	}
+	
+	method noPuedeHacerLlamada(){
+		tieneCredito = false
+	}
+	
+}
+
+
