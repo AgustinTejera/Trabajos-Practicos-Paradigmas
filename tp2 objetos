@@ -1,0 +1,180 @@
+//AGUSTIN TEJERA - CURSO K2104 - TP2 OBJETOS
+
+object paqueteMisterioso{
+	var estaPago = true
+	var destino = brooklyn
+	
+	method puedeSerEntregado(mensajero){
+		return destino.puedePasar(mensajero) && estaPago  
+	}
+}
+
+object brooklyn{
+	method puedePasar(mensajero){
+ 		return mensajero.peso() < self.unaTonelada()
+	} 
+	
+	method unaTonelada(){
+ 		return 1000
+	}
+}
+
+object matrix{
+	method puedePasar(mensajero){ 
+ 		return mensajero.puedeHacerLlamada()
+	}
+}
+
+object roberto{
+	var peso = 90
+	var vehiculo = jenny
+	var puedeHacerLlamada = false
+	
+	method manejar(vehiculoNuevo){
+ 		vehiculo = vehiculoNuevo
+	}
+
+	method puedeHacerLlamada(){
+ 		return puedeHacerLlamada
+	}
+
+	method peso(){
+ 		return peso
+	}
+}
+
+object jenny{
+
+	method peso(){
+ 		return roberto.peso()
+	}
+}
+
+object mack{
+	var acoplado = 1
+
+	method peso(){
+ 		return roberto.peso() + self.mediaTonelada() * acoplado
+	}
+
+	method ponerAcoplado(){
+ 		acoplado++
+	}
+
+	method mediaTonelada(){
+ 		return 500
+	}
+}
+
+object chuckNorris{
+	var peso= 900
+	var puedeHacerLlamada= true
+
+	method peso(){
+ 		return peso
+	}
+
+	method puedeHacerLlamada(){
+ 		return puedeHacerLlamada
+	}
+}
+
+object neo{
+	var peso= 0
+	var tieneCredito= 1
+
+	method peso(){
+	return peso
+	}
+
+	method puedeHacerLlamada(){
+ 		return tieneCredito > 0
+	}
+
+	method llama(){
+ 		tieneCredito--
+	} 
+}
+
+//                       PARTE 2
+
+object fedax{
+	var mensajeros = [roberto, chuckNorris, neo]
+	var enviados = []
+
+	method contratar(mensajero){
+ 		mensajeros.add(mensajero)
+	}
+
+	method despedir(mensajero){
+ 		mensajeros.remove(mensajero)
+	}
+
+	method despedirATodos(){
+ 		mensajeros.clear()
+	}
+
+	method esGrande(){
+ 		return mensajeros.size() > 2
+	}
+
+	method ultimoMensajero(){
+ 		return mensajeros.last()
+	}
+
+	method primerMensajero(){
+ 		return mensajeros.first()
+	}
+
+	method pesoUltimoMensajero(){
+ 		var x = self.ultimoMensajero()
+ 		return x.peso()
+	}
+
+	method elPrimeroPuedeEntregar(unPaquete) {
+ 		return unPaquete.puedeSerEntregado(self.primerMensajero())
+	}   //  return unPaquete.puedeSerEntregado(return mensajeros.first())
+
+
+//                      PARTE 3 
+
+
+	method puedeSerEntregado(unPaquete){
+ 		return mensajeros.any({unMensajero => unPaquete.puedeSerEntregado(unMensajero)})
+	}
+
+	method esFacil(unPaquete){
+ 		return mensajeros.all({unMensajero => unPaquete.puedeSerEntregado(unMensajero)})
+	}
+
+	method candidatos(unPaquete){
+ 		return mensajeros.filter({unMensajero=> unPaquete.puedeSerEntregado(unMensajero)})
+	}
+
+	method tieneSobrepeso(){
+ 		return self.pesoPromedio() > mack.mediaTonelada()
+	}
+
+	method pesoPromedio(){
+ 		return mensajeros.sum({unMensajero => unMensajero.peso()})/mensajeros.size()
+	}
+
+	method enviar(unPaquete){
+ 		if(!self.puedeSerEntregado(unPaquete)) 
+  		error.throwWithMessage("No hay mensajeros para la entrega")
+ 		enviados.add(unPaquete)
+		}
+}
+
+object cristian{
+	var peso= 70
+	var puedeHacerLlamada = true
+
+	method peso(){
+ 		return peso
+	}
+
+	method puedeHacerLlamada(){
+ 		return puedeHacerLlamada
+	}
+}
