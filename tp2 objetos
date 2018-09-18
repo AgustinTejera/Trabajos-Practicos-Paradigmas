@@ -61,6 +61,8 @@ object mack{
  		acoplado++
 	}
 
+	// EL PESO EN CUALQUIER CASO ES EN KILOGRAMOS
+
 	method mediaTonelada(){
  		return 500
 	}
@@ -127,14 +129,13 @@ object fedax{
 	}
 
 	method pesoUltimoMensajero(){
- 		var x = self.ultimoMensajero()
- 		return x.peso()
+ 		 return self.ultimoMensajero().peso()
 	}
 
 	method elPrimeroPuedeEntregar(unPaquete) {
  		return unPaquete.puedeSerEntregado(self.primerMensajero())
 	}   //  return unPaquete.puedeSerEntregado(return mensajeros.first())
-
+		// lo habia comentado porque antes no habia armado el metodo primerMensajero
 
 //                      PARTE 3 
 
@@ -160,10 +161,13 @@ object fedax{
 	}
 
 	method enviar(unPaquete){
- 		if(!self.puedeSerEntregado(unPaquete)) 
-  		error.throwWithMessage("No hay mensajeros para la entrega")
- 		enviados.add(unPaquete)
+ 		if(self.puedeSerEntregado(unPaquete)){
+  			enviados.add(unPaquete)
+  		}
+  		else{
+ 			error.throwWithMessage("No hay mensajeros para la entrega")
 		}
+	}
 }
 
 object cristian{
