@@ -1,0 +1,23 @@
+import parcialParadigmas.*
+describe "test parcial"{
+		var carpeta2 = new Carpeta(nombre='carpeta2')
+		var archivoPro = new Archivo(nombre='archivoPro',contenido=['hola','chau'])
+		var carpeta1 = new Carpeta(nombre='carpeta1',archivos=[])
+		var archivoPro1 = new Archivo(nombre='archivoPro1',contenido=['hola1','chau1'])
+
+	fixture{
+		carpeta1.agregarArchivo(archivoPro)
+		
+	}
+	test "Averiguar si una carpeta contiene un archivo con un nombre dado" {
+		assert.that(carpeta1.contieneArchivo(archivoPro))
+	}
+	test "Averiguar si una carpeta no contiene un archivo con un nombre dado" {
+		assert.notThat(carpeta1.contieneArchivo(archivoPro1))
+	}
+	test "Error al crear un archivo ya existente(commits):"{
+		assert.throwsExceptionWithMessage("no podes, ya existe el archivo",{commitPro1.crear(archivoPro1)})
+	}
+}
+
+
