@@ -1,0 +1,29 @@
+import TpIntegradorparte2.*
+describe "TEST INTE PARTE 2 PUNTO 3"{
+	var rolando = new Personaje()
+	var espadaDelDestino = new Arma()
+	var mascaraOscura = new Mascara(indice = 1, minimo = 4)
+	var armadura = new Armadura(valorBase=2 , refuerzo=ninguno)
+	var espectroMalefico = new Logos(nombre= "Espectro Malefico", multiplicador = 1)
+	var espejoFantastico = new EspejoFantastico()
+	fixture{
+		rolando.agregarArtefacto(espadaDelDestino)
+		rolando.agregarArtefacto(collarDivino)
+		rolando.agregarArtefacto(mascaraOscura)
+		rolando.agregarArtefacto(armadura)
+		rolando.agregarArtefacto(espejoFantastico)	
+		collarDivino.cambiarPerlas(5)
+		
+	}
+	test "Saber si Rolando está cargado"{
+		assert.that(rolando.estaCargado())
+	}
+	test "Hacer que Rolando se saque la armadura.Saber si Rolando está cargado."{
+		rolando.removerArtefacto(armadura)
+		assert.notThat(rolando.estaCargado())
+	}
+	test "Saber cuánta habilidad para la lucha tiene Rolando."{
+		assert.equals(20,rolando.lucha())
+	}
+
+}	

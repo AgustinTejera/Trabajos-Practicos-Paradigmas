@@ -1,0 +1,56 @@
+import TP2MARTINs.*
+describe "Test entrega 2 parte 2"{
+	var rolando = new Personaje()
+	var espadaDelDestino = new Arma()
+	var mascaraOscura = new Mascara (indiceOscuro = 1, minimo = 4)
+	var armadura = new Armadura (valorBase = 2, refuerzo = ninguno)
+	var espectroMalefico = new Logos(nombre = "Espectro Malefico", multiplier = 1)
+	var espejoFantastico = new Espejo ()
+	fixture {
+		rolando.agregarArtefacto(mascaraOscura)
+		rolando.agregarArtefacto(collarDivino)
+		rolando.agregarArtefacto(espadaDelDestino)
+		rolando.agregarArtefacto(armadura)
+		rolando.agregarArtefacto(espejoFantastico)
+		rolando.cambiarHechizo(espectroMalefico)
+	}
+	test "Cargado" {
+	
+	assert.that(rolando.estaCargado())
+ }
+test "Sin armadura cargado"{
+	rolando.removerArtefacto(armadura)
+	assert.notThat(rolando.estaCargado())
+}
+test "Habilidad de Lucha"{
+	
+	assert.equals(20,rolando.nivelDeLucha())
+}
+test "Lucha Armadura bendicion"{
+	armadura.ponerRefuerzo(bendicion)
+	assert.equals(58,armadura.lucha())
+}
+test "Lucha Armadura cota"{
+	var cotaDeMalla = new Cota(unidadLucha = 1)
+	armadura.ponerRefuerzo(cotaDeMalla)
+	assert.equals(3,armadura.lucha())
+}
+test "Lucha Armadura basico"{
+	armadura.ponerRefuerzo(hechizoBasico)
+	assert.equals(12,armadura.lucha())
+}
+test "Lucha Armadura malefico"{
+	armadura.ponerRefuerzo(espectroMalefico)
+	assert.equals(19,armadura.lucha())
+}
+test "Lucha espejo = 0"{
+	rolando.desequiparse()
+	rolando.agregarArtefacto(espejoFantastico)
+	assert.equals(1,rolando.nivelDeLucha())
+}
+test "Hechiceria libro hechizos"{
+	var libroHechizos = new Libro(hechizos = [espectroMalefico,hechizoBasico])
+	rolando.cambiarHechizo(libroHechizos)
+	assert.equals(56,rolando.nivelDeHechiceria())
+}
+}

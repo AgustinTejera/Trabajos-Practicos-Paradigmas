@@ -1,0 +1,51 @@
+import Tpintegradorparte1.*
+test "Saber si Rolando está cargado"{
+	rolando.agregarArtefacto(armadura)
+	//3.times({i=>rolando.agregarArtefacto(mascaraOscura)})
+	assert.that(rolando.estaCargado())
+}
+
+test "Hacer que Rolando se saque la armadura.Saber si Rolando está cargado."{
+	rolando.agregarArtefacto(armadura)
+	rolando.removerArtefacto(armadura)
+	assert.notThat(rolando.estaCargado())
+}
+
+test "Saber cuánta habilidad para la lucha tiene Rolando"{
+	rolando.agregarArtefacto(armadura)
+	assert.equals(20,rolando.lucha())
+}
+
+test "Saber cuál es la habilidad para la lucha de la armadura de Rolando si tiene una bendición de refuerzo"{
+	armadura.cambiarRefuerzo(bendicion)
+	assert.equals(58,armadura.lucha())
+}
+
+test "Saber cuál es la habilidad para la lucha de la armadura de Rolando si tiene una cota de malla de refuerzo"{
+	armadura.cambiarRefuerzo(cotaDeMalla)
+	assert.equals(3,armadura.lucha())
+}
+
+test "Saber cuál es la habilidad para la lucha de la armadura de Rolando si tiene el hechizo básico de refuerzo"{
+	armadura.cambiarRefuerzo(hechizoBasico)
+	assert.equals(12,armadura.lucha())
+}
+
+test "Saber cuál es la habilidad para la lucha de la armadura de Rolando si tiene el hechizo espectro maléfico 
+de refuerzo"{
+	armadura.cambiarRefuerzo(espectroMalefico)
+	assert.equals(19,armadura.lucha())
+}
+
+test "Eliminar todos los artefactos de Rolando.Incorporar solamente el espejo.Saber cuál es la habilidad
+ para la lucha de Rolando."{
+	rolando.removerArtefactos()
+	rolando.agregarArtefacto(espejoFantastico)
+	assert.equals(1,rolando.lucha())
+}
+
+test "Reemplazar al hechizo preferido por un libro de hechizos que contenga el espectro maléfico 
+(con nombre “espectro maléfico”) y al hechizo básico.Saber cuál es el nivel de hechicería de Rolando."{
+	rolando.cambiarHechizoPreferido(libroDeHechizos)
+	assert.equals(56,rolando.nivelDeHechiceria())
+}
