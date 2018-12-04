@@ -33,3 +33,6 @@ class SinPlataException inherits Exception{}
 
 
 throw new SinPlataException("Dinero Insuficiente")
+
+>>> persona.parasitos().isEmpty()
+true
