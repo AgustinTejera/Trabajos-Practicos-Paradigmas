@@ -1,0 +1,51 @@
+import cosas.*
+
+object camion {
+	const tara = 1000
+	// si querés saber qué es property y no lo viste todavía,
+	// chequeá este documento: 
+	// https://docs.google.com/document/d/1wziW1YY-t94UUAUApydrt-OZ5roq1uY6DT6FduwNGx0/edit?usp=sharing
+	const property cosas = []
+	var pesoMaximo = 1.5
+	
+	method cargar(unaCosa) {
+		cosas.add(unaCosa)
+		// algo mas? No!
+	}
+	method descargar(unaCosa){
+		cosas.remove(unaCosa)
+	}
+	
+	method pesoTotal(){
+		return tara + self.carga()
+	}
+	method carga(){
+		return cosas.sum({unaCosa => unaCosa.peso()})
+	}
+	// pesoTotal(): es la suma del peso del camión vacío (tara) 
+	//y su carga. La tara del camión es de 1 tonelada (1000 
+	// kilogramos);
+	method excedidoDePeso(){
+		return self.pesoTotal() > pesoMaximo
+	}
+	
+	//excedidoDePeso(): indica si el peso total es superior al peso
+	// máximo (que es de 1.5 toneladas);
+	
+   method objetosPeligrosos(nivel){
+   	cosas.filter({unaCosa=> unaCosa.peligrosidad() > nivel })
+   }
+   
+   //objetosPeligrosos(nivel): todos los objetos cargados que
+//superan el nivel de peligrosidad indicados por el valor del 
+//parámetro;
+
+
+  method cosaMasPesada(){
+  	cosas.max ({unaCosa=> unaCosa.peso()})
+  }
+  
+  
+  //cosaMasPesada(): la cosa más pesada que tenga el camión. 
+  //Ojo que lo que se pide es la cosa y no su peso.
+}
